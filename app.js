@@ -28,6 +28,8 @@ let dirty = false;
 let dataHash = '';
 let refreshNumber = 0;
 const openSections = new Set();
+const browserMode = document.querySelector('meta[name="board-digest-mode"]')?.content === 'browser-demo';
+let demoModule;
 
 function tell(message, error = false) {
   const box = $('#message');
@@ -45,9 +47,18 @@ async function api(path, body) {
   }
   let response;
   try {
-    response = await fetch(path, options);
+    if (browserMode) {
+      demoModule ??= import('./browser-demo.mjs');
+      const { browserRequest } = await demoModule;
+      response = await browserRequest(path, roleSelect.value, body);
+    } else {
+      response = await fetch(path, options);
+    }
   } catch {
     throw new Error('เชื่อมต่อแอปไม่ได้ กรุณาลองใหม่');
+  }
+  if (!response.headers.get('content-type')?.includes('json') && (!response.ok || path === '/api/state')) {
+    throw new Error('แอปไม่ได้รับข้อมูลจาก API กรุณาตรวจการตั้งค่าเซิร์ฟเวอร์');
   }
   if (!response.ok) throw new Error((await response.json()).error);
   return response;
