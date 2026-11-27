@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Board Digest</title>
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="identity"><span class="mark" aria-hidden="true">BD</span><div><strong>The Board Digest</strong><small>Office of the Company Secretary</small></div></div>
+    <label class="role">บทบาททดลอง
+      <select id="role">
+        <option value="comsec">ComSec</option>
+        <option value="finance">ฝ่ายการเงิน</option>
+        <option value="operations">ฝ่ายปฏิบัติการ</option>
+      </select>
+    </label>
+  </header>
+  <div class="layout">
+    <aside>
+      <nav id="nav" aria-label="เมนูหลัก">
+        <button data-tab="meetings" aria-current="page">ปฏิทินประชุม</button>
+        <button data-tab="actions">งานติดตาม</button>
+        <button data-tab="reminders" data-internal>การแจ้งเตือน</button>
+        <button data-tab="audit" data-internal>ประวัติการทำงาน</button>
+      </nav>
+      <p class="demo">ต้นแบบในเครื่อง · ข้อมูลจำลอง</p>
+    </aside>
+    <main>
+      <div id="message" role="status" hidden></div>
+      <div id="content" aria-busy="true"><p>กำลังโหลดข้อมูล…</p></div>
+      <footer id="updated"></footer>
+    </main>
+  </div>
+</body>
+</html>

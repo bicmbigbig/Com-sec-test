@@ -1,0 +1,15 @@
+/data/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+.env
+.env.*
+__pycache__/
+*.pyc
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.pdf
+*.zip
